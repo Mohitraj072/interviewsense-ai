@@ -1,0 +1,50 @@
+# ─── InterviewSense AI — .gitignore ──────────────────────────────────────────
+
+# Environment secrets — NEVER commit these
+.env
+.env.local
+.env.*.local
+backend/serviceAccountKey.json
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+backend/venv/
+backend/.venv/
+backend/env/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage
+coverage/
+.nyc_output/
+htmlcov/
+.coverage
+
+# Render / Vercel build artifacts
+.vercel/
+.render/
