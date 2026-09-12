@@ -1,55 +1,85 @@
 # InterviewSense AI 🎙️
 
-> AI-powered mock interview platform with voice input, Gemini-powered evaluation, and detailed analytics.
+> AI-powered mock interview platform with voice input, Gemini-powered evaluation, and detailed performance analytics.
 
-## Tech Stack
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge)](https://interviewsense-ai-tau.vercel.app)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/Mohitraj072/interviewsense-ai)
+
+---
+
+## 🚀 Live Demo
+
+**Frontend:** https://interviewsense-ai-tau.vercel.app  
+**Backend API:** https://interviewsense-ai-0zeq.onrender.com/api/health
+
+---
+
+## ✨ Features
+
+- 🎤 **Voice Input** — Real-time speech-to-text with live transcription and filler word detection
+- 🤖 **AI Question Generation** — Google Gemini generates personalized questions by domain and difficulty
+- 📄 **Resume Upload** — Upload your PDF resume and get questions tailored to your experience
+- 📊 **Detailed Reports** — Radar chart, score breakdown, strengths, improvements, and study plan
+- 🔐 **Firebase Auth** — Google login and email/password authentication
+- 💾 **Firestore Storage** — All interviews and reports saved and accessible from dashboard
+- 📈 **Dashboard Analytics** — Average score, best score, streak tracker, and interview history
+
+---
+
+## 🛠️ Tech Stack
 
 | Layer | Technology |
 |---|---|
 | Frontend | React 18 + Vite + Tailwind CSS 3 |
-| Backend | Flask (Python) |
-| AI | Google Gemini 1.5 Pro |
+| Backend | Flask (Python) + Gunicorn |
+| AI | Google Gemini 1.5 Flash |
 | Auth + DB | Firebase Auth + Firestore |
 | Deployment | Vercel (frontend) + Render (backend) |
 
-## Project Structure
+---
+
+## 📋 Interview Modes
+
+| Type | Domains | Difficulty |
+|---|---|---|
+| Technical | DSA, Web Dev, OS, DBMS, System Design, OOPs | Easy / Medium / Hard |
+| HR | Behavioral, Situational | Easy / Medium / Hard |
+| Mixed | Technical + HR combined | Easy / Medium / Hard |
+
+---
+
+## 🏗️ Project Structure
 
 ```
-ai-mock-interviewer/
-├── frontend/              # React + Vite + Tailwind
+interviewsense-ai/
+├── frontend/                  # React + Vite + Tailwind
 │   ├── src/
-│   │   ├── components/    # Shared UI components
-│   │   ├── pages/
-│   │   │   ├── Landing.jsx
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── Interview.jsx
-│   │   │   └── Report.jsx
-│   │   ├── firebase.js    # Firebase config
-│   │   ├── App.jsx        # Router setup
-│   │   └── index.css      # Global styles + design system
-│   ├── .env.example       # Frontend env vars template
-│   ├── package.json
-│   ├── tailwind.config.js
+│   │   ├── components/        # Shared UI components
+│   │   └── pages/
+│   │       ├── Landing.jsx
+│   │       ├── Dashboard.jsx
+│   │       ├── Interview.jsx
+│   │       └── Report.jsx
 │   └── vite.config.js
-├── backend/               # Flask API
-│   ├── app.py             # App factory
-│   ├── routes/
-│   │   ├── interview.py   # /api/interview/*
-│   │   └── report.py      # /api/report/*
-│   ├── prompts/
-│   │   └── templates.py   # Gemini prompt templates
-│   ├── .env.example       # Backend env vars template
-│   └── requirements.txt
-└── .gitignore
+└── backend/                   # Flask Python API
+    ├── routes/
+    │   ├── interview.py
+    │   └── report.py
+    ├── prompts/
+    ├── app.py
+    ├── Procfile
+    └── requirements.txt
 ```
 
-## Quick Start
+---
 
-### 1. Clone and set up
+## ⚡ Quick Start
+
+### 1. Clone the repo
 
 ```bash
-git clone <your-repo-url>
-cd ai-mock-interviewer
+git clone https://github.com/Mohitraj072/interviewsense-ai.git
+cd interviewsense-ai
 ```
 
 ### 2. Frontend Setup
@@ -57,8 +87,8 @@ cd ai-mock-interviewer
 ```bash
 cd frontend
 npm install
-cp .env.example .env     # Fill in your Firebase config
-npm run dev              # Runs on http://localhost:3000
+cp .env.example .env    # Fill in your Firebase config + backend URL
+npm run dev             # Runs on http://localhost:5173
 ```
 
 ### 3. Backend Setup
@@ -66,37 +96,62 @@ npm run dev              # Runs on http://localhost:3000
 ```bash
 cd backend
 python -m venv venv
-venv\Scripts\activate    # Windows
+venv\Scripts\activate   # Windows
 pip install -r requirements.txt
-cp .env.example .env     # Fill in your Gemini + Firebase keys
-python app.py            # Runs on http://localhost:5000
+cp .env.example .env    # Fill in your Gemini API key
+python app.py           # Runs on http://localhost:5000
 ```
 
 ### 4. Environment Variables
 
-**Frontend** (`.env`): Firebase Web SDK config — see `.env.example`
+**Frontend** (`.env`):
+```
+VITE_API_URL=http://localhost:5000
+VITE_FIREBASE_API_KEY=your_key
+VITE_FIREBASE_AUTH_DOMAIN=your_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
 
-**Backend** (`.env`): Gemini API key + Firebase Admin SDK — see `.env.example`
+**Backend** (`.env`):
+```
+GEMINI_API_KEY=your_gemini_api_key
+FRONTEND_URL=http://localhost:5173
+```
 
-## Features (Build Progress)
+---
 
-- [x] Step 1: Project setup + folder structure
-- [x] Step 2: Landing page (premium dark mode)
-- [ ] Step 3: Auth + Dashboard
-- [ ] Step 4: Interview Engine (Voice + Gemini)
-- [ ] Step 5: Post-interview Report + Resume upload
-- [ ] Step 6: Streak system + Shareable cards
-- [ ] Step 7: Deployment (Vercel + Render)
-
-## API Endpoints
+## 🔌 API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
 | GET | `/api/health` | Health check |
+| POST | `/api/generate-questions` | Generate interview questions |
 | POST | `/api/interview/start` | Start a new interview session |
 | POST | `/api/interview/next` | Evaluate answer + get next question |
-| POST | `/api/interview/end` | End session |
-| POST | `/api/interview/resume` | Upload resume for personalized Qs |
-| POST | `/api/report/generate` | Generate full report |
-| GET | `/api/report/:id` | Fetch a report |
-| GET | `/api/report/history/:uid` | User's interview history |
+| POST | `/api/interview/end` | End session + generate report |
+| POST | `/api/resume/extract` | Upload resume for personalized questions |
+| POST | `/api/report/generate` | Generate full performance report |
+
+---
+
+## 📸 Screenshots
+
+> Landing page → Interview screen → AI-powered report with radar chart
+
+---
+
+## 🧑‍💻 Built By
+
+**Mohit Raj** — 2nd year BTech student  
+Built in a single day as a full-stack AI project.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://linkedin.com)
+
+---
+
+## 📄 License
+
+MIT License — feel free to fork and build on this!
